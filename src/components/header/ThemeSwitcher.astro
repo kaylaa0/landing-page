@@ -1,0 +1,92 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<!--
+  negative margin is sum of button width (8) and gap size of flex parent (6)
+  TODO don't hardcode these values
+-->
+<button
+    id="theme-switcher"
+    type="button"
+    class="theme-switcher -ml-14 origin-[right_center] scale-0 transition-all duration-500"
+>
+    <div id="icon-theme-light">
+        <Icon name="theme/light" class="h-8" />
+        <span class="sr-only">Use light theme</span>
+    </div>
+    <div id="icon-theme-dark" class="hidden">
+        <Icon name="theme/dark" class="h-8" />
+        <span class="sr-only">Use dark theme</span>
+    </div>
+</button>
+
+<script>
+    import invariant from "tiny-invariant";
+
+    // variables
+    let darkMode = localStorage.getItem("darkMode");
+    const themes = ["dark", "light"];
+    const button = document.querySelector("#theme-switcher");
+    invariant(button, "button should not be null");
+
+    // functions
+    const enableDarkMode = () => {
+        document.body.classList.add("darkmode");
+        button.setAttribute("aria-pressed", "true");
+        button.setAttribute("aria-label", "Disable dark mode");
+        localStorage.setItem("darkMode", "enabled");
+    };
+
+    const disableDarkMode = () => {
+        document.body.classList.remove("darkmode");
+        button.setAttribute("aria-pressed", "false");
+        button.setAttribute("aria-label", "Enable dark mode");
+        localStorage.setItem("darkMode", "disabled");
+    };
+
+    // execution
+    if (darkMode == "enabled") enableDarkMode();
+    document.documentElement.dataset.theme == "dark"
+        ? enableDarkMode()
+        : disableDarkMode();
+
+    const getThemeCurrent = () => document.documentElement.dataset.theme;
+    const getThemeNext = () => {
+        const themeCurrent = getThemeCurrent();
+        invariant(themeCurrent, "themeCurrent should not be undefined");
+        const indexThemeCurrent = themes.indexOf(themeCurrent);
+        return themes[(indexThemeCurrent + 1) % themes.length];
+    };
+
+    const updateIcon = () => {
+        const themeCurrent = getThemeCurrent();
+        document
+            .querySelector(`#icon-theme-${themeCurrent}`)
+            ?.classList.add("hidden");
+        const themeNext = getThemeNext();
+        document
+            .querySelector(`#icon-theme-${themeNext}`)
+            ?.classList.remove("hidden");
+    };
+
+    button.addEventListener("click", () => {
+        const themeNext = getThemeNext();
+        document.documentElement.dataset.theme = themeNext;
+        localStorage.setItem("theme", themeNext);
+        updateIcon();
+        darkMode = localStorage.getItem("darkMode");
+        themeNext == "dark" ? enableDarkMode() : disableDarkMode();
+    });
+
+    updateIcon();
+</script>
+
+<style>
+    :global(.fixed-header) #theme-switcher {
+        @apply ml-0 scale-100;
+    }
+    #theme-switcher {
+        padding: 0 !important;
+    }
+</style>

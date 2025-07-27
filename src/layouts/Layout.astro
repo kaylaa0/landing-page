@@ -1,0 +1,110 @@
+---
+import PageWeb from "~/components/pageWeb/index.astro";
+import PageAI from "~/components/pageAI/index.astro";
+import PageGame from "~/components/pageGame/index.astro";
+import PageSkills from "~/components/pageSkills/index.astro";
+import Header from "~/components/header/index.astro";
+import Splash from "~/components/splash/index.astro";
+
+export interface Props {
+    title: string;
+    description: string;
+    author: string;
+}
+
+const { generator, site } = Astro;
+
+const { title, description, author } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <title>{title}</title>
+        <meta name="generator" content={generator} />
+        <meta name="description" content={description} />
+        <meta name="author" content={author} />
+
+        <!-- social media -->
+        <meta property="og:title" content="Meet Kayla!" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={site} />
+    </head>
+
+    <body
+        class="h-full bg-default text-default text-base selection:bg-secondary selection:text-white"
+        style="font-family: InterVariable, Inter;"
+    >
+        <div class="scroll-section header-scroll-ref">
+            <Header />
+            <section class="scrolling-anchor scrolling-top-anchor flex">
+                <Splash />
+            </section>
+
+            <section>
+                <div class="space-y-24 px-8 pt-32">
+                    <section class="scrolling-anchor flex">
+                        <PageWeb />
+                    </section>
+                    <section class="scrolling-anchor flex">
+                        <PageAI />
+                    </section>
+                    <section class="scrolling-anchor flex">
+                        <PageGame />
+                    </section>
+                    <section class="scrolling-anchor flex">
+                        <PageSkills />
+                    </section>
+                </div>
+            </section>
+        </div>
+
+        <!-- initialize theme -->
+        <script is:inline>
+            const themeSaved = localStorage.getItem("theme");
+
+            if (themeSaved) {
+                document.documentElement.dataset.theme = themeSaved;
+            } else {
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches;
+                document.documentElement.dataset.theme = prefersDark
+                    ? "dark"
+                    : "light";
+            }
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", (event) => {
+                    if (!localStorage.getItem("theme")) {
+                        document.documentElement.dataset.theme = event.matches
+                            ? "dark"
+                            : "light";
+                    }
+                });
+        </script>
+        <script src="~/scripts/scroll.js"></script>
+    </body>
+</html>

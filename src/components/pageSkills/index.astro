@@ -1,0 +1,80 @@
+---
+import IconList from "./IconList.astro";
+import ContentSection from "~/components/ContentSection.astro";
+import type { IconItem } from "~/types";
+
+const frameworks: Array<IconItem> = [
+    {
+        title: "React",
+        icon: "frameworks/react",
+        url: "https://reactjs.org/",
+    },
+    {
+        title: "Preact",
+        icon: "frameworks/preact",
+        url: "https://preactjs.com/",
+    },
+    {
+        title: "Next",
+        icon: "frameworks/next",
+        url: "https://nextjs.org/",
+    },
+    {
+        title: "Astro",
+        icon: "frameworks/astro",
+        url: "https://astro.build/",
+    },
+    {
+        title: "Keras",
+        icon: "frameworks/keras",
+        url: "https://keras.io/",
+    },
+    {
+        title: "PyTorch",
+        icon: "frameworks/pytorch",
+        url: "https://pytorch.org/",
+    },
+];
+
+const tools: Array<IconItem> = [
+    {
+        title: "Atlassian",
+        icon: "tools/atlassian",
+        url: "https://www.atlassian.com/",
+    },
+    {
+        title: "Godot",
+        icon: "tools/godot",
+        url: "https://godotengine.org/",
+    },
+    {
+        title: "Unity",
+        icon: "tools/unity",
+        url: "https://unity.com/",
+    },
+    {
+        title: "PostgreSQL",
+        icon: "tools/postgre",
+        url: "https://www.postgresql.org/",
+    },
+    {
+        title: "Git",
+        icon: "tools/git",
+        url: "https://git-scm.com/",
+    },
+
+    {
+        title: "Figma",
+        icon: "tools/figma",
+        url: "https://www.figma.com/",
+    },
+];
+---
+
+<ContentSection title="Wide Knowledge" id="compatibility">
+    <Fragment slot="lead">
+        I am an <span class="text-primary">expert</span> in many technologies.
+    </Fragment>
+    <IconList items={frameworks} title="Frameworks" />
+    <IconList items={tools} title="Tools" />
+</ContentSection>

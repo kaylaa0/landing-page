@@ -1,0 +1,18 @@
+---
+import ContentSection from "~/components/ContentSection.astro";
+import ShowcaseCard from "./ShowcaseCard.astro";
+import { getShowcase } from "~/data/showcase";
+
+const sites = await getShowcase();
+---
+
+<ContentSection title="Game Development" id="showcase">
+    <Fragment slot="lead">
+        I develop games from <span class="text-primary">ground up</span>.
+    </Fragment>
+    <div class="max-w-6xl space-y-2">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {sites.map((site) => <ShowcaseCard site={site} />)}
+        </div>
+    </div>
+</ContentSection>

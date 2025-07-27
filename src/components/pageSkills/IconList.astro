@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon";
+import type { IconItem } from "~/types";
+
+export interface Props {
+    items: Array<IconItem>;
+    title: string;
+}
+
+const { items, title } = Astro.props;
+---
+
+<div class="w-full max-w-6xl space-y-2">
+    <div class="relative border border-default bg-offset px-6 pb-4 pt-8">
+        <h3
+            class="absolute right-4 top-0 -translate-y-1/2 rounded-full border border-current bg-default px-4 py-1 text-center uppercase tracking-tight text-xs"
+            style={{ minWidth: "150px" }}
+        >
+            {title}
+        </h3>
+        <ul class="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-6">
+            {
+                items.map((item: any) => (
+                    <li>
+                        <a
+                            class="action-color-disabled flex flex-col items-center gap-2"
+                            href={item.url}
+                        >
+                            <Icon class="h-12" name={item.icon} />
+                            <span>{item.title}</span>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+    <p class="text-right text-sm">
+        <a
+            class="text-primary"
+            href="https://www.linkedin.com/in/-kayla-/details/skills/"
+            target="_blank"
+            onclick="document.getElementById('portModal').showModal(); event.preventDefault(); return false;"
+        >
+            ...and more &rarr;</a
+        >
+    </p>
+</div>

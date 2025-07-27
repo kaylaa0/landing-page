@@ -1,0 +1,100 @@
+---
+import { Icon } from "astro-icon";
+import ContentSection from "~/components/ContentSection.astro";
+import Modal from "./Modal.astro";
+---
+
+<ContentSection title="Web Developer" id="intro">
+    <Fragment slot="lead">
+        I develop websites using
+        <span class="text-primary">modern</span> solutions.
+    </Fragment>
+    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <li class="link-card">
+            <a
+                href=""
+                class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
+                onclick="document.getElementById('webModal').showModal(); event.preventDefault(); return false;"
+            >
+                <Icon name="mdi/telescope" class="h-8" />
+                <span>See Work Experience</span>
+            </a>
+        </li>
+        <li class="link-card">
+            <a
+                href="https://github.com/kaylaa0?tab=repositories&q=&type=&language=javascript&sort="
+                class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
+                target="_blank"
+            >
+                <Icon name="mdi/rocket" class="h-8" />
+                <span>View Web Projects</span>
+            </a>
+        </li>
+    </div>
+</ContentSection>
+
+<Modal id="webModal">
+    <div slot="modal" class="flex flex-col items-start space-y-4">
+        <div>
+            <strong>Full-stack Developer Intern at Türksat:</strong>
+            <p class="flex items-center">
+                Fulfilling several customer requirements of a document
+                management system called Garaj, built with React, Spring Boot,
+                PostgreSQL and a mobile version implemented with Flutter, using
+                Jira and Confluence.
+            </p>
+        </div>
+
+        <div>
+            <strong>Frontend Developer Intern at Ouva:</strong>
+            <p class="flex items-center">
+                Responsible for working on a variety of tasks for the web
+                interfaces of Ouva Care Automation & Patient Assistant Platforms
+                using various technologies including React, TypeScript, Sass,
+                Ant Design, Webpack, and Apollo GraphQL via a remote setup using
+                Linear, Slack, Notion, and Gitbook.
+            </p>
+        </div>
+    </div>
+</Modal>
+
+<style lang="scss" is:global>
+    .link-card {
+        list-style: none;
+        display: flex;
+        padding: 0.25rem;
+
+        background-image: none;
+        background-size: 400%;
+
+        background-position: 100%;
+        transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+        a {
+            width: 100%;
+            text-decoration: none;
+            line-height: 1.4;
+            padding: 1rem 1.3rem;
+
+            background-color: var(--color-background);
+            opacity: 0.8;
+            span {
+                margin: 0;
+                color: var(--action-color);
+                font-size: 1.25rem;
+                transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+        }
+
+        &:is(:hover) {
+            background-position: 0;
+            background-image: var(--accent-gradient);
+            a {
+                opacity: 0.7;
+                span {
+                    color: var(--dark-action-color);
+                }
+            }
+        }
+    }
+</style>

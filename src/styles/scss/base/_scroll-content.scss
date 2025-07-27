@@ -1,0 +1,30 @@
+// | -------------------------------------------------------------
+// | Scroll Content
+// | -------------------------------------------------------------
+
+.scroll-section {
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.scrolling-anchor {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scrolling-anchor:not(.scrolling-top-anchor)::before {
+    content: "";
+    position: absolute;
+    top: -10vh;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+}
+
+.scroll-section.shake {
+    animation: shake 0.5s ease-in-out;
+}

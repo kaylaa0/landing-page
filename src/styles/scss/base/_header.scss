@@ -1,0 +1,43 @@
+@use "../styles/scss/base/outline" as *;
+
+header {
+    .type-icon a {
+        display: block;
+
+        [astro-icon] {
+            margin-top: -4px;
+            width: 30px;
+
+            path {
+                fill: var(--action-color);
+                transition: fill 0.2s ease-in-out;
+            }
+        }
+
+        &:hover {
+            [astro-icon] path {
+                fill: var(--action-color-state);
+            }
+        }
+    }
+}
+
+header:not(.fixed-header) {
+    a {
+        color: white !important;
+        .logo-shiny-badge {
+            border-radius: 0.2rem !important;
+        }
+        [astro-icon] {
+            path {
+                fill: white;
+            }
+        }
+        &:hover {
+            color: theme("colors.pink.500") !important;
+            [astro-icon] path {
+                fill: theme("colors.pink.500") !important;
+            }
+        }
+    }
+}

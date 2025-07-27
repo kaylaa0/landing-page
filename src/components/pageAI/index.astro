@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon";
+import ContentSection from "~/components/ContentSection.astro";
+import type { FeatureItem } from "~/types";
+
+const features: Array<FeatureItem> = [
+    {
+        title: "Artifical Intelligence",
+        description: "Creating AI from the scratch.",
+        icon: "mdi/directions-fork",
+    },
+    {
+        title: "Machine Learning",
+        description: "Developing solutions with deep learning.",
+        icon: "mdi/graph",
+    },
+    {
+        title: "Cutting Edge",
+        description: "Including all the newest technoligies.",
+        icon: "mdi/search-web",
+    },
+];
+---
+
+<ContentSection title="AI/ML technologies" id="features">
+    <Fragment slot="lead">
+        I develop <span class="text-primary">cutting edge</span> AI/ML techonologies.
+    </Fragment>
+    <a
+        href="https://github.com/kaylaa0?tab=repositories&q=&type=&language=jupyter+notebook&sort="
+        target="_blank"
+    >
+        <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {
+                features.map(({ title, description, icon }) => (
+                    <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
+                        <div class="h-16 w-16 rounded-full border-2 border-current p-3">
+                            <Icon name={icon} />
+                        </div>
+                        <p class="text-center font-extrabold text-xl">
+                            {title}
+                        </p>
+                        <p class="text-center text-offset text-sm">
+                            {description}
+                        </p>
+                    </li>
+                ))
+            }
+        </ul>
+    </a>
+</ContentSection>

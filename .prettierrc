@@ -1,0 +1,12 @@
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "overrides": [
+        {
+            "files": [".cjs", ".json"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+---
+import { Picture } from "@astrojs/image/components";
+import LogoImage from "~/assets/logo_outline-1024x1024.png";
+import AstronautImage from "~/assets/astronaut.png";
+
+import Starfield from "./Starfield.astro";
+import GitHubCorner from "./GithubCorner.astro";
+
+const widths = [450, 800];
+const sizes = "(min-width: 640px) 42vw, 67vw";
+
+const widths_logo = [384, 384];
+const sizes_logo = "(min-width: 128px) 10vw, 40vw";
+---
+
+<section class="relative h-screen w-full flex-auto bg-black">
+    <Starfield />
+    <GitHubCorner />
+
+    <div class="relative grid h-full place-items-center sm:grid-cols-2">
+        <h2
+            class="flex flex-col gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end"
+        >
+            <Picture
+                class="h-full w-full object-cover"
+                src={LogoImage}
+                widths={widths_logo}
+                sizes={sizes_logo}
+                loading="eager"
+                alt="Personal Logo of Kayla"
+            />
+            <div
+                class="gradient-text pb-2 text-center font-extrabold tracking-tighter text-8xl"
+            >
+                Meet
+                <br /> Kayla
+            </div>
+        </h2>
+        <div
+            id="astronaut"
+            class="xs: max-w-lg self-start pl-0 sm:self-auto sm:justify-self-start sm:pl-8"
+        >
+            <Picture
+                class="h-full w-full object-cover"
+                src={AstronautImage}
+                widths={widths}
+                sizes={sizes}
+                loading="eager"
+                alt="A floating astronaut in a space suit"
+            />
+        </div>
+    </div>
+</section>
+
+<noscript>
+    <style>
+        #splash-bg-fallback {
+            display: block;
+        }
+    </style>
+</noscript>
+
+<style>
+    #astronaut {
+        animation: float linear 2.5s infinite alternate;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #astronaut {
+            @apply animate-none;
+        }
+
+        :global(#starfield) {
+            @apply hidden;
+        }
+
+        #splash-bg-fallback {
+            @apply block;
+        }
+    }
+</style>
