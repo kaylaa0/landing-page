@@ -8,7 +8,7 @@
   </a>
   <p align="center">
 	<h3 align="center">Landing Page 2022</h3>
-	<a href="https://kayla.works"><strong>View Live »</strong></a>
+	<a href="https://v1.kayla.works"><strong>View Live »</strong></a>
   </p>
 </div>
 
